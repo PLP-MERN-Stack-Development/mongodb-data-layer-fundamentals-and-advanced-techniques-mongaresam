@@ -1,0 +1,85 @@
+# PLP Bookstore MongoDB Project
+
+This project demonstrates **basic and advanced MongoDB operations** including CRUD operations, aggregation, and indexing.
+
+---
+
+## 📂 Project Structure
+
+* **Task 1:** Insert sample book documents into the database (`insert_books.js`)
+* **Task 2:** Basic CRUD queries (Find, Update, Delete)
+* **Task 3:** Advanced queries with filtering, projection, sorting, and pagination
+* **Task 4:** Aggregation pipelines (grouping, average price, counts)
+* **Task 5:** Indexing for performance optimization
+
+---
+
+## ⚙️ Requirements
+
+* [Node.js](https://nodejs.org/) installed
+* [MongoDB Community Server](https://www.mongodb.com/try/download/community) running locally (`mongodb://localhost:27017`)
+* [Mongo Shell (mongosh)](https://www.mongodb.com/docs/mongodb-shell/) installed
+
+---
+
+## 🚀 How to Run
+
+### 1. Start MongoDB
+
+Make sure your MongoDB server is running on your machine:
+
+```bash
+mongod
+```
+
+### 2. Insert sample data (Task 1)
+
+Run the insert script in Mongo shell:
+
+```bash
+mongosh
+use plp_bookstore
+load("insert_books.js")
+```
+
+This will create a `books` collection with 10+ sample book documents.
+
+### 3. Run CRUD and Advanced Queries (Tasks 2–3)
+
+After data is inserted, switch to the database:
+
+```bash
+use plp_bookstore
+```
+
+Then paste and run the queries from **Task 2** and **Task 3** (in `mongosh`).
+
+### 4. Run Aggregation Pipelines (Task 4)
+
+Paste and run the aggregation queries in Mongo shell:
+
+* Average price of books by genre
+* Author with the most books
+* Group books by decade
+
+### 5. Indexing (Task 5)
+
+Create indexes and check performance:
+
+```js
+db.books.createIndex({ title: 1 })
+db.books.createIndex({ author: 1, published_year: -1 })
+db.books.find({ author: "George Orwell" }).sort({ published_year: -1 }).explain("executionStats")
+```
+
+Check that the query uses `"IXSCAN"` instead of `"COLLSCAN"`.
+
+---
+
+## 📖 Notes
+
+* The database name is **`plp_bookstore`**.
+* All queries should be run inside the Mongo shell (`mongosh`).
+* The `insert_books.js` script uses `db.books.insertMany([...])`, so no Node.js runtime is required — only MongoDB.
+
+---
